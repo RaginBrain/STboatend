@@ -362,6 +362,83 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiBoatBoat extends Schema.CollectionType {
+  collectionName: 'boats';
+  info: {
+    singularName: 'boat';
+    pluralName: 'boats';
+    displayName: 'Boat';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    length: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    image: Attribute.Media;
+    capacity: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::boat.boat', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::boat.boat', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTrippTripp extends Schema.CollectionType {
+  collectionName: 'tripps';
+  info: {
+    singularName: 'tripp';
+    pluralName: 'tripps';
+    displayName: 'tripp';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    date: Attribute.Date;
+    startTime: Attribute.Time;
+    occupancy: Attribute.Integer;
+    price: Attribute.Integer;
+    type: Attribute.Enumeration<['poludnevna', 'cjelodnevna', 'sunset']>;
+    startLocation: Attribute.Enumeration<['Split', 'Trogir', 'Hvar']>;
+    tourName: Attribute.Enumeration<['BlueCave', 'BlueLagoon', 'TourDeHvar']>;
+    note: Attribute.String;
+    boat: Attribute.Relation<'api::tripp.tripp', 'oneToOne', 'api::boat.boat'>;
+    users_permissions_user: Attribute.Relation<
+      'api::tripp.tripp',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tripp.tripp',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tripp.tripp',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -587,7 +664,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -616,6 +692,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    type: Attribute.Enumeration<['brodar', 'booker', 'admin']>;
+    company: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -687,6 +765,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::boat.boat': ApiBoatBoat;
+      'api::tripp.tripp': ApiTrippTripp;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
