@@ -75,6 +75,11 @@
     },
     "company": {
       "type": "string"
+    },
+    "boats": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::boat.boat"
     }
   }
 }

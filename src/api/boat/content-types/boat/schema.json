@@ -4,7 +4,8 @@
   "info": {
     "singularName": "boat",
     "pluralName": "boats",
-    "displayName": "Boat"
+    "displayName": "boat",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,20 +21,13 @@
       "required": true,
       "min": 0
     },
-    "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": false
-    },
     "capacity": {
       "type": "integer",
       "required": true,
       "min": 1
+    },
+    "image_url": {
+      "type": "string"
     }
   }
 }

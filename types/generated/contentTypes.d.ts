@@ -367,7 +367,8 @@ export interface ApiBoatBoat extends Schema.CollectionType {
   info: {
     singularName: 'boat';
     pluralName: 'boats';
-    displayName: 'Boat';
+    displayName: 'boat';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -379,12 +380,12 @@ export interface ApiBoatBoat extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
-    image: Attribute.Media;
     capacity: Attribute.Integer &
       Attribute.Required &
       Attribute.SetMinMax<{
         min: 1;
       }>;
+    image_url: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -738,6 +739,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     type: Attribute.Enumeration<['brodar', 'booker', 'admin']>;
     company: Attribute.String;
+    boats: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::boat.boat'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
