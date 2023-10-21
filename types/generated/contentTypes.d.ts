@@ -440,6 +440,36 @@ export interface ApiTrippTripp extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserManagmentUserManagment extends Schema.SingleType {
+  collectionName: 'user_managments';
+  info: {
+    singularName: 'user-managment';
+    pluralName: 'user-managments';
+    displayName: 'user-managment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    info: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-managment.user-managment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-managment.user-managment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -773,6 +803,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::boat.boat': ApiBoatBoat;
       'api::tripp.tripp': ApiTrippTripp;
+      'api::user-managment.user-managment': ApiUserManagmentUserManagment;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

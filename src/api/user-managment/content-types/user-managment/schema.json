@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "user_managments",
+  "info": {
+    "singularName": "user-managment",
+    "pluralName": "user-managments",
+    "displayName": "user-managment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "info": {
+      "type": "json"
+    }
+  }
+}
