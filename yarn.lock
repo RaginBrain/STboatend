@@ -1295,12 +1295,27 @@
     "@types/request" "^2.48.4"
     "request" "^2.88.0"
 
+"@sendgrid/client@^7.7.0":
+  "integrity" "sha512-SxH+y8jeAQSnDavrTD0uGDXYIIkFylCo+eDofVmZLQ0f862nnqbC3Vd1ej6b7Le7lboyzQF6F7Fodv02rYspuA=="
+  "resolved" "https://registry.npmjs.org/@sendgrid/client/-/client-7.7.0.tgz"
+  "version" "7.7.0"
+  dependencies:
+    "@sendgrid/helpers" "^7.7.0"
+    "axios" "^0.26.0"
+
 "@sendgrid/helpers@^6.4.0", "@sendgrid/helpers@^6.5.5":
   "integrity" "sha512-uRFEanalfss5hDsuzVXZ1wm7i7eEXHh1py80piOXjobiQ+MxmtR19EU+gDSXZ+uMcEehBGhxnb7QDNN0q65qig=="
   "resolved" "https://registry.npmjs.org/@sendgrid/helpers/-/helpers-6.5.5.tgz"
   "version" "6.5.5"
   dependencies:
     "chalk" "^2.0.1"
+    "deepmerge" "^4.2.2"
+
+"@sendgrid/helpers@^7.7.0":
+  "integrity" "sha512-3AsAxfN3GDBcXoZ/y1mzAAbKzTtUZ5+ZrHOmWQ279AuaFXUNCh9bPnRpN504bgveTqoW+11IzPg3I0WVgDINpw=="
+  "resolved" "https://registry.npmjs.org/@sendgrid/helpers/-/helpers-7.7.0.tgz"
+  "version" "7.7.0"
+  dependencies:
     "deepmerge" "^4.2.2"
 
 "@sendgrid/mail@6.4.0":
@@ -1310,6 +1325,14 @@
   dependencies:
     "@sendgrid/client" "^6.4.0"
     "@sendgrid/helpers" "^6.4.0"
+
+"@sendgrid/mail@7.7.0":
+  "integrity" "sha512-5+nApPE9wINBvHSUxwOxkkQqM/IAAaBYoP9hw7WwgDNQPxraruVqHizeTitVtKGiqWCKm2mnjh4XGN3fvFLqaw=="
+  "resolved" "https://registry.npmjs.org/@sendgrid/mail/-/mail-7.7.0.tgz"
+  "version" "7.7.0"
+  dependencies:
+    "@sendgrid/client" "^7.7.0"
+    "@sendgrid/helpers" "^7.7.0"
 
 "@sentry/core@6.19.7":
   "integrity" "sha512-tOfZ/umqB2AcHPGbIrsFLcvApdTm9ggpi/kQZFkej7kMphjT+SGBiQfYtjyg9jcRW+ilAR4JXC9BGKsdEQ+8Vw=="
@@ -1776,6 +1799,14 @@
   "resolved" "https://registry.npmjs.org/@strapi/provider-audit-logs-local/-/provider-audit-logs-local-4.14.4.tgz"
   "version" "4.14.4"
 
+"@strapi/provider-email-sendgrid@^4.14.5":
+  "integrity" "sha512-RJg42w61Sy7mbwx4zH3p16SZgdKzKYOnseZ6z6DYqMBJREOtx8BI0KWrIyeSY2tRl8C9qiTp6SoPsI1YDbgCBA=="
+  "resolved" "https://registry.npmjs.org/@strapi/provider-email-sendgrid/-/provider-email-sendgrid-4.14.5.tgz"
+  "version" "4.14.5"
+  dependencies:
+    "@sendgrid/mail" "7.7.0"
+    "@strapi/utils" "4.14.5"
+
 "@strapi/provider-email-sendmail@4.14.4":
   "integrity" "sha512-s1iSQeU/rubP6ubpla6BUOpVu87i7CIWXsd0Oai7kHJAgRxYU5Lg7Bj1TOCjFwMe6bgYrSNydLLFlWhREXML4A=="
   "resolved" "https://registry.npmjs.org/@strapi/provider-email-sendmail/-/provider-email-sendmail-4.14.4.tgz"
@@ -1919,6 +1950,18 @@
   "integrity" "sha512-Eyj9PB4Gz6r8cHsWzVOCnmEDTgYr17n3P8xOGHoLUN9Uz7dB7eeloeUNhYiAZHKzNDd02LETySWTglwwA5NpXQ=="
   "resolved" "https://registry.npmjs.org/@strapi/utils/-/utils-4.14.4.tgz"
   "version" "4.14.4"
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+    "date-fns" "2.30.0"
+    "http-errors" "1.8.1"
+    "lodash" "4.17.21"
+    "p-map" "4.0.0"
+    "yup" "0.32.9"
+
+"@strapi/utils@4.14.5":
+  "integrity" "sha512-0/lC5C2FyaCO+TDBb/jk3CQxtmEbxBZzt0NSb0M6tgAYB6o9eiC2IHZT11Ni98p+GgBlT3AhGQJ5idUa/j/hWA=="
+  "resolved" "https://registry.npmjs.org/@strapi/utils/-/utils-4.14.5.tgz"
+  "version" "4.14.5"
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     "date-fns" "2.30.0"
@@ -2963,6 +3006,13 @@
   "integrity" "sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg=="
   "resolved" "https://registry.npmjs.org/aws4/-/aws4-1.12.0.tgz"
   "version" "1.12.0"
+
+"axios@^0.26.0":
+  "integrity" "sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA=="
+  "resolved" "https://registry.npmjs.org/axios/-/axios-0.26.1.tgz"
+  "version" "0.26.1"
+  dependencies:
+    "follow-redirects" "^1.14.8"
 
 "axios@1.5.0":
   "integrity" "sha512-D4DdjDo5CY50Qms0qGQTTw6Q44jl7zRwY7bthds06pUGfChBCTcQs+N743eFWGEd6pRTMd6A+I87aWyFV5wiZQ=="
@@ -4863,7 +4913,7 @@
   "resolved" "https://registry.npmjs.org/fn.name/-/fn.name-1.1.0.tgz"
   "version" "1.1.0"
 
-"follow-redirects@^1.0.0", "follow-redirects@^1.15.0":
+"follow-redirects@^1.0.0", "follow-redirects@^1.14.8", "follow-redirects@^1.15.0":
   "integrity" "sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q=="
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.3.tgz"
   "version" "1.15.3"
