@@ -386,6 +386,11 @@ export interface ApiBoatBoat extends Schema.CollectionType {
         min: 1;
       }>;
     image_url: Attribute.String;
+    users_permissions_user: Attribute.Relation<
+      'api::boat.boat',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
