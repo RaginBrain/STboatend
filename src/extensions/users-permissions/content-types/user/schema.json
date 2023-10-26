@@ -80,6 +80,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::boat.boat"
+    },
+    "phone": {
+      "type": "integer"
     }
   }
 }
