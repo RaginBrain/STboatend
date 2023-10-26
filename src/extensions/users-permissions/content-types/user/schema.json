@@ -82,7 +82,7 @@
       "target": "api::boat.boat"
     },
     "phone": {
-      "type": "integer"
+      "type": "string"
     }
   }
 }
