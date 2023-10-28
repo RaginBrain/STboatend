@@ -15,7 +15,7 @@ module.exports = {
             let filter = {};
 
             if (date) {
-              filter.date = date;
+              filter.date_gte = date;
             }
             if (startLocation ) {
               filter.startLocation  = startLocation ;
