@@ -1,20 +1,35 @@
 'use strict';
 
 module.exports = {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/*{ strapi }*/) {},
+  register({ strapi }) {
+    const extension = ({ nexus }) => ({
+      typeDefs: `
+        extend type Query {
+          getTripps(date: String, location: String, offset: Int! = 0): [Tripp]
+        }
+      `,
+      resolvers: {
+        Query: {
+          getTripps: async (parent, args) => {
+            const { date, location, offset } = args;
+            let filter = {};
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
+            if (date) {
+              filter.date = date;
+            }
+            if (location) {
+              filter.location = location;
+            }
+            
+            // Incorporating offset for pagination
+            filter._start = offset;
+            return await strapi.services.tripp.find(filter);
+          }
+        }
+      }
+    });
+
+    strapi.plugin('graphql').service('extension').use(extension);
+  },
   bootstrap(/*{ strapi }*/) {},
-};
+}
