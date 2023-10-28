@@ -11,14 +11,14 @@ module.exports = {
       resolvers: {
         Query: {
           getTripps: async (parent, args) => {
-            const { date, location, offset, limit } = args;
+            const { date, startLocation , offset, limit } = args;
             let filter = {};
 
             if (date) {
               filter.date = date;
             }
-            if (location) {
-              filter.location = location;
+            if (startLocation ) {
+              filter.startLocation  = startLocation ;
             }
 
             // Incorporating offset and limit for pagination
