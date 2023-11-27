@@ -15,6 +15,14 @@ module.exports = {
         config: {
             auth:false,
         }
+      },
+      {
+        method: 'POST',
+        path: '/send-booking-email',
+        handler: 'user-managment.sendBookingEmail',
+        config: {
+            auth: false,
+        }
       }
     ]
   }
