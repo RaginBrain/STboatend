@@ -89,9 +89,6 @@ module.exports = createCoreController('api::user-managment.user-managment', ({st
       } catch (error) {
         ctx.send({ error: 'Failed to send email.', details: error });
       }
-
-      
-      
     }
 
 })
