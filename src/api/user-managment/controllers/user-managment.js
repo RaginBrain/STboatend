@@ -35,8 +35,6 @@ module.exports = createCoreController('api::user-managment.user-managment', ({st
 
     async sendBookingEmail(ctx) {
       sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
-      
-
        // Extract email addresses from request body
        
       // Validate and extract email addresses
@@ -53,7 +51,8 @@ module.exports = createCoreController('api::user-managment.user-managment', ({st
         passengerCount, 
         totalPrice, 
         note, 
-        tourProviderCompanyName 
+        tourProviderCompanyName,
+        boatInfo,
       } = ctx.request.body;
 
   
@@ -66,13 +65,14 @@ module.exports = createCoreController('api::user-managment.user-managment', ({st
           `Detalji Vaše rezervacije:<br><br>` +
 
           `<div style="font-size: 1.2em; border-top: 2px dotted; border-bottom: 2px dotted;">` + // Increase font size and add dotted border
-          `- Rezervaciju napravio: ${bookerName}<br>` +
+          `- Rezervaciju napravio: ${bookerName} &nbsp;&nbsp; >${bookerMail} <br>` +
           `- Naziv : <strong>${tourName}</strong><br>` +
           `- Datum : <strong>${date}</strong><br>` +
           `- Vrijeme polaska: <strong>${startTime}</strong><br>` +
           `- Trajanje : ${duration}<br>` +
           `- Mjesto polaska: ${startLocation}<br>` +
           `- Brodar: ${tourProvider}<br>` +
+          `- Brod: ${boatInfo}<br>` +
           `- Broj putnika: <strong>${passengerCount}</strong><br>` +
           `- Ukupna cijena: <strong>${totalPrice}€</strong><br><br>` +
           `Napomena bookera: ${note}<br>` +

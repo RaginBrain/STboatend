@@ -362,6 +362,169 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiBoatBoat extends Schema.CollectionType {
+  collectionName: 'boats';
+  info: {
+    singularName: 'boat';
+    pluralName: 'boats';
+    displayName: 'boat';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    length: Attribute.Decimal &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    capacity: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
+    image_url: Attribute.String;
+    users_permissions_user: Attribute.Relation<
+      'api::boat.boat',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::boat.boat', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::boat.boat', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBookingBooking extends Schema.CollectionType {
+  collectionName: 'bookings';
+  info: {
+    singularName: 'booking';
+    pluralName: 'bookings';
+    displayName: 'booking';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    booker: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    brodar: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    tourName: Attribute.String;
+    bookTime: Attribute.DateTime;
+    startDate: Attribute.Date;
+    seatsBooked: Attribute.Integer;
+    totalPrice: Attribute.Integer;
+    startLocation: Attribute.String;
+    note: Attribute.String;
+    tourType: Attribute.String;
+    boatInfo: Attribute.String;
+    startTime: Attribute.Time;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::booking.booking',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTrippTripp extends Schema.CollectionType {
+  collectionName: 'tripps';
+  info: {
+    singularName: 'tripp';
+    pluralName: 'tripps';
+    displayName: 'tripp';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    date: Attribute.Date;
+    startTime: Attribute.Time;
+    occupancy: Attribute.Integer;
+    price: Attribute.Integer;
+    type: Attribute.Enumeration<['poludnevna', 'cjelodnevna', 'sunset']>;
+    startLocation: Attribute.Enumeration<['Split', 'Trogir', 'Hvar']>;
+    tourName: Attribute.Enumeration<['BlueCave', 'BlueLagoon', 'TourDeHvar']>;
+    note: Attribute.String;
+    boat: Attribute.Relation<'api::tripp.tripp', 'oneToOne', 'api::boat.boat'>;
+    users_permissions_user: Attribute.Relation<
+      'api::tripp.tripp',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tripp.tripp',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tripp.tripp',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserManagmentUserManagment extends Schema.SingleType {
+  collectionName: 'user_managments';
+  info: {
+    singularName: 'user-managment';
+    pluralName: 'user-managments';
+    displayName: 'user-managment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    info: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-managment.user-managment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-managment.user-managment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -667,11 +830,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::boat.boat'
     >;
     phone: Attribute.String;
-    bookings: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::booking.booking'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -682,168 +840,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBoatBoat extends Schema.CollectionType {
-  collectionName: 'boats';
-  info: {
-    singularName: 'boat';
-    pluralName: 'boats';
-    displayName: 'boat';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    length: Attribute.Decimal &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 0;
-      }>;
-    capacity: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1;
-      }>;
-    image_url: Attribute.String;
-    users_permissions_user: Attribute.Relation<
-      'api::boat.boat',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::boat.boat', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::boat.boat', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBookingBooking extends Schema.CollectionType {
-  collectionName: 'bookings';
-  info: {
-    singularName: 'booking';
-    pluralName: 'bookings';
-    displayName: 'Booking';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    tourName: Attribute.String;
-    vrijemeBookinga: Attribute.DateTime;
-    polazak: Attribute.String;
-    trajanje: Attribute.String;
-    mjestoPolaska: Attribute.String;
-    brojPutnika: Attribute.Integer;
-    ukuonaCijena: Attribute.Integer;
-    napomenaBookera: Attribute.String;
-    datumPolaska: Attribute.Date;
-    booker: Attribute.Relation<
-      'api::booking.booking',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    brodar: Attribute.Relation<
-      'api::booking.booking',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::booking.booking',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::booking.booking',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTrippTripp extends Schema.CollectionType {
-  collectionName: 'tripps';
-  info: {
-    singularName: 'tripp';
-    pluralName: 'tripps';
-    displayName: 'tripp';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    date: Attribute.Date;
-    startTime: Attribute.Time;
-    occupancy: Attribute.Integer;
-    price: Attribute.Integer;
-    type: Attribute.Enumeration<['poludnevna', 'cjelodnevna', 'sunset']>;
-    startLocation: Attribute.Enumeration<['Split', 'Trogir', 'Hvar']>;
-    tourName: Attribute.Enumeration<['BlueCave', 'BlueLagoon', 'TourDeHvar']>;
-    note: Attribute.String;
-    boat: Attribute.Relation<'api::tripp.tripp', 'oneToOne', 'api::boat.boat'>;
-    users_permissions_user: Attribute.Relation<
-      'api::tripp.tripp',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::tripp.tripp',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::tripp.tripp',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiUserManagmentUserManagment extends Schema.SingleType {
-  collectionName: 'user_managments';
-  info: {
-    singularName: 'user-managment';
-    pluralName: 'user-managments';
-    displayName: 'user-managment';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    info: Attribute.JSON;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::user-managment.user-managment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::user-managment.user-managment',
       'oneToOne',
       'admin::user'
     > &
@@ -861,16 +857,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::boat.boat': ApiBoatBoat;
+      'api::booking.booking': ApiBookingBooking;
+      'api::tripp.tripp': ApiTrippTripp;
+      'api::user-managment.user-managment': ApiUserManagmentUserManagment;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::boat.boat': ApiBoatBoat;
-      'api::booking.booking': ApiBookingBooking;
-      'api::tripp.tripp': ApiTrippTripp;
-      'api::user-managment.user-managment': ApiUserManagmentUserManagment;
     }
   }
 }
